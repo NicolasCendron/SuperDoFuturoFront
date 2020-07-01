@@ -1,7 +1,7 @@
 # SuperDoFuturo
 Front do projeto de Reconhecimento de produtos via YoLo
 * Requisitos
-  * Conexão ativa com a internet (Pode ser contornado facilmente disponibilizando localmente Jquery, Bootsrap e socket.io)
+  * Conexão ativa com a internet (Pode ser contornado facilmente disponibilizando localmente Jquery, Bootsrap e socket.io para o client)
   * Node instalado na máquina. (https://nodejs.org/en/)
   * Backend responsável pela lógica e capaz de informar os enventos ao servidor. (https://github.com/Scheffel-V/SuperFuturo)
 * Montar Ambiente:
