@@ -16,3 +16,14 @@ inputs.forEach((input) => {
   input.addEventListener("focus", addcl);
   input.addEventListener("blur", remcl);
 });
+
+$("#btnLogin").on("click", () => {
+  if ($("#txtPassword").val() == "") {
+    alert("Por favor insira sua senha.");
+    return false;
+  }
+
+  localStorage.setItem("strUsuario", $("#txtUsuario").val());
+  console.log(localStorage.getItem("strUsuario"));
+  window.open("view.html", "_self");
+});

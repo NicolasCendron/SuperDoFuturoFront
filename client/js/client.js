@@ -115,6 +115,12 @@ function addLine(table, p) {
   table.find("tbody").append(html);
 }
 
+function colocaNomeCliente() {
+  if (localStorage.getItem("strUsuario") !== undefined) {
+    $("#nome_cliente").html("de " + localStorage.getItem("strUsuario"));
+  }
+}
+
 $(document).ready(function () {
   var jsonEstoque = {
     produtos: [
@@ -123,6 +129,7 @@ $(document).ready(function () {
       { id: "3", nome: "Italac", quantidade: "34", preco: "4.50" },
     ],
   };
+  colocaNomeCliente();
   populaEstoque(jsonEstoque);
   populaListaDeCompras(jsonEstoque);
   console.log("Start");
