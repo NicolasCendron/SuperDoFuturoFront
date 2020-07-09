@@ -45,9 +45,11 @@ body{
 }
 
 form{
-	width: 25%;
-	margin-left: 35.5%;
-	margin-top: 1%;
+	width: 30%;
+	height: 40%;
+	padding: 1%;
+	margin-left: 35%;
+	margin-top: 5%;
 }
 
 .login-content img{
@@ -59,6 +61,15 @@ form{
 	color: #333;
 	text-transform: uppercase;
 	font-size: 2.9rem;
+}
+
+.fa-smile-wink{
+	color: #3399ff;
+}
+
+.fa-smile-wink:hover{
+	color: #ddd;
+	transition: 0.5s;
 }
 
 .login-content .input-div{
