@@ -13,9 +13,11 @@
   <body>
     <div class="flex-container container">
       <div class="row" style="text-align: center; margin-top: 5px;">
-        <div class="col-md-12">
+        <div class="flex-container col-md-12">
           <i class="fas fa-smile-wink fa-3x"></i>
           <h2 class="title">Obrigado por comprar conosco!</h2>
+          <h3 class="title">Seu Pagamento no valor de:  <span id="spanValor"></span> foi aprovado.</h3>
+          <h4class="title">Cartão:  **** **** **** 1902</h4>
         </div>
       </div>
     </div>
@@ -25,5 +27,13 @@
       crossorigin="anonymous"
     ></script>
     <script type="text/javascript" src="js/main.js"></script>
+    <script>
+    $(document).ready(() => {
+      console.log(localStorage.getItem("strValorCompra"))
+      if (localStorage.getItem("strValorCompra") !== undefined){
+        $("#spanValor").html(localStorage.getItem("strValorCompra"))
+      }
+    });
+    </script>
   </body>
 </html>

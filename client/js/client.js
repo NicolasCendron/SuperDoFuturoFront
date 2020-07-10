@@ -121,6 +121,12 @@ function colocaNomeCliente() {
   }
 }
 
+$("#btnFinalizarCompra").on("click", () => {
+  console.log($("#valorTotalCompra").val());
+  localStorage.setItem("strValorCompra", $("#valorTotalCompra").html());
+  window.open("checkout.html", "_self");
+});
+
 $(document).ready(function () {
   var jsonEstoque = {
     produtos: [

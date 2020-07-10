@@ -41,7 +41,11 @@ body {
 
   float: left;
 }
-
+.form-checkout {
+  float: right;
+  margin-top: 3%;
+  margin-right: 5%;
+}
 .wrapper-estoque {
   width: 40%;
   margin-right: 5%;
