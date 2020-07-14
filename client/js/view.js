@@ -24,7 +24,6 @@ function calculaTotalCarrinho() {
     qtdeTotal += qtdeAtual;
     valorAtual = pegaValorTr($(tr));
     valorTotal += qtdeAtual * valorAtual;
-    console.log(qtdeAtual);
   });
 
   $("#qtdeTotalCompra").html(qtdeTotal);
@@ -56,7 +55,7 @@ function populaListaDeCompras(json) {
   const oLista = json.produtos;
   for (let i = 0; i < oLista.length; i++) {
     oLista[i].quantidade = "0";
-    addLine($("#tableLista"), oLista[i]);
+    addLine($("#tableLista"), oLista[i], i + 1);
   }
   calculaTotalCarrinho();
 }
@@ -66,7 +65,7 @@ function populaEstoque(json) {
   const oLista = json.produtos;
   for (let i = 0; i < oLista.length; i++) {
     const qtde = parseInt(oLista[i].quantidade);
-    addLine($("#tableEstoque"), oLista[i]);
+    addLine($("#tableEstoque"), oLista[i], i + 1);
   }
   calculaTotalEstoque();
 }
@@ -86,6 +85,7 @@ function incrementaItem(rowLista) {
     $(rowLista).removeClass("bg-success");
   }, 1000);
 }
+
 function decrementaItem(rowLista) {
   const arrTD = $(rowLista).find("td");
   const td = $(arrTD)[2];
@@ -97,11 +97,22 @@ function decrementaItem(rowLista) {
     $(rowLista).removeClass("bg-danger");
   }, 1000);
 }
-function addLine(table, p) {
+
+function selectRowByProductName($rowList, strProductName) {
+  let retorno;
+  $rowList.each(function (index, row) {
+    if (row.children[1].innerText == strProductName) {
+      console.log(row);
+      retorno = row;
+    }
+  });
+  return retorno;
+}
+function addLine(table, p, id) {
   const html =
     "<tr>" +
     "<td>" +
-    p.id +
+    id +
     "</td>" +
     "<td>" +
     p.nome +
@@ -122,7 +133,6 @@ function colocaNomeCliente() {
 }
 
 $("#btnFinalizarCompra").on("click", () => {
-  console.log($("#valorTotalCompra").val());
   localStorage.setItem("strValorCompra", $("#valorTotalCompra").html());
   window.open("checkout.html", "_self");
 });
@@ -130,9 +140,9 @@ $("#btnFinalizarCompra").on("click", () => {
 $(document).ready(function () {
   var jsonEstoque = {
     produtos: [
-      { id: "1", nome: "Ades", quantidade: "49", preco: "4.50" },
-      { id: "2", nome: "Visconti", quantidade: "23", preco: "3.00" },
-      { id: "3", nome: "Italac", quantidade: "34", preco: "4.50" },
+      { nome: "Ades", quantidade: "49", preco: "4.50" },
+      { nome: "Visconti", quantidade: "23", preco: "3.00" },
+      { nome: "Italac", quantidade: "34", preco: "4.50" },
     ],
   };
   colocaNomeCliente();
@@ -141,27 +151,40 @@ $(document).ready(function () {
   console.log("Start");
   socket.emit("start");
 
-  socket.on("add", function (id) {
-    const rowLista = $("#tableLista > tbody > tr")[parseInt(id, 10) - 1];
-    const rowEstoque = $("#tableEstoque > tbody > tr")[parseInt(id, 10) - 1];
-
+  socket.on("add", function (strName) {
+    strName = strName.split('"').join("");
+    const rowLista = selectRowByProductName(
+      $("#tableLista > tbody > tr"),
+      strName
+    );
+    const rowEstoque = selectRowByProductName(
+      $("#tableEstoque > tbody > tr"),
+      strName
+    );
+    console.log(rowLista);
     incrementaItem(rowLista);
     decrementaItem(rowEstoque);
     calculaTotalCarrinho();
     calculaTotalEstoque();
-    console.log("Adicionou " + id);
+    console.log("Adicionou " + strName);
   });
 
-  socket.on("remove", function (id) {
-    const rowLista = $("#tableLista > tbody > tr")[parseInt(id, 10) - 1];
-    const rowEstoque = $("#tableEstoque > tbody > tr")[parseInt(id, 10) - 1];
-
+  socket.on("remove", function (strName) {
+    strName = strName.split('"').join("");
+    const rowLista = selectRowByProductName(
+      $("#tableLista > tbody > tr"),
+      strName
+    );
+    const rowEstoque = selectRowByProductName(
+      $("#tableEstoque > tbody > tr"),
+      strName
+    );
     incrementaItem(rowEstoque);
     decrementaItem(rowLista);
 
     calculaTotalEstoque();
     calculaTotalCarrinho();
-    console.log("Removeu" + id);
+    console.log("Removeu" + strName);
   });
 
   socket.on("populateStock", function (jsonListaCompras) {

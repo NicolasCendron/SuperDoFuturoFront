@@ -16,14 +16,16 @@ Front do projeto de Reconhecimento de produtos via YoLo
       - express (https://expressjs.com/pt-br/)
       - socket.io (https://socket.io/)
     - Rodar o Servidor: _node server.js_
+      - Porta Padrão 3000
+      - _node server.js -p PORTA-DESEJADA_
 
 - Instruções de Uso
   - Adicionar Item no Carrinho
-    - Com o server rodando, realizar uma chamada POST http://127.0.0.1:3000/Add?id=1
-    - Substituir id pelo ID do produto que deseja mover do estoque para o carrinho
+    - Com o server rodando, realizar uma chamada POST http://127.0.0.1:3000/Add?nome="NOME_PRODUTO"
+    - Substituir NOME_PRODUTO pelo produto que deseja mover do estoque para o carrinho
   - Remover Item do Carrinho
-    - Com o server rodando, realizar uma chamada POST http://127.0.0.1:3000/Remove?id=1
-    - Substituir id pelo ID do produto que deseja mover do carrinho para o estoque.
+    - Com o server rodando, realizar uma chamada POST http://127.0.0.1:3000/Remove?nome="Ades"
+    - Substituir NOME_PRODUTO pelo produto que deseja mover do carrinho para o estoque
   - Popular Estoque
     - Com o server rodando, realizar uma chamada POST http://127.0.0.1:3000/PopulateStock
     - Passar um JSON no body no seguinte formato (Futuramente retiraremos o ID e indexaremos pelo nome)
@@ -31,15 +33,12 @@ Front do projeto de Reconhecimento de produtos via YoLo
 ```json
 {
   "produtos": [
-    { "id": "1", "nome": "Ades", "quantidade": "49", "preco": "4.50" },
-    { "id": "2", "nome": "Visconti", "quantidade": "23", "preco": "3.00" },
-    { "id": "3", "nome": "Italac", "quantidade": "34", "preco": "4.50" }
+    { "nome": "Ades", "quantidade": "49", "preco": "4.50" },
+    { "nome": "Visconti", "quantidade": "23", "preco": "3.00" },
+    { "nome": "Italac", "quantidade": "34", "preco": "4.50" }
   ]
 }
 ```
 
 - Melhorias propostas
-  - Refatorar o código.
-  - Melhorar Layout.
   - Tornar disponivel localmente (Não necessitar de acesso a internet).
-  - Permitir que o backend inicialize o estoque via JSON.
