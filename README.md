@@ -39,6 +39,3 @@ Front do projeto de Reconhecimento de produtos via YoLo
   ]
 }
 ```
-
-- Melhorias propostas
-  - Tornar disponivel localmente (Não necessitar de acesso a internet).
