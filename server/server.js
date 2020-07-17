@@ -1,18 +1,23 @@
 const express = require("express");
+const util = require("util");
 const http = require("http");
 const socketIO = require("socket.io");
 const app = express();
-app.use(express.json());
+
+app.use(express.urlencoded());
+
 const server = http.Server(app);
 const io = socketIO(server);
 
-let PORT = 3000;
+const DEFAULT_PORT = 3000;
 
-try {
-  PORT = process.argv[3];
-} catch {
-  PORT = 3000;
-}
+// get options from the command line
+var options = require('minimist')(process.argv.slice(2));
+console.log("options: "); 
+console.dir(options);
+let PORT = options.p || options.port || DEFAULT_PORT;
+let DEBUG = options.d || options.debug || false
+
 console.log("Server Running on localhost:3000");
 console.log("API:");
 console.log("Add (POST), Remove (POST), PopulateStock (POST)");
@@ -29,13 +34,19 @@ console.log(`{
 //Escuta o Backend e manda ordens pra o Client
 
 app.post("/Add", (req, res) => {
+  if (DEBUG)
+    console.log("query: " + util.inspect(req.query, false, null, true /* enable colors */));
+
   io.emit("add", req.query.nome);
   console.log("Adicionou Produto com Nome: " + req.query.nome);
   res.sendStatus(200);
 });
 app.post("/Remove", (req, res) => {
+  if (DEBUG)
+    console.log("query: " + util.inspect(req.query, false, null, true /* enable colors */));
+
   io.emit("remove", req.query.nome);
-  console.log("Removeu Produto com Nome:" + req.query.nome);
+  console.log("Removeu Produto com Nome: " + req.query.nome);
   res.sendStatus(200);
 });
 app.post("/PopulateStock", (req, res) => {

@@ -15,9 +15,9 @@ Front do projeto de Reconhecimento de produtos via YoLo
     - Instalar Dependencias: _npm install_ (Deve instalar automaticamente os itens abaixo)
       - express (https://expressjs.com/pt-br/)
       - socket.io (https://socket.io/)
-    - Rodar o Servidor: _node server.js_
-      - Porta Padrão 3000
-      - _node server.js -p PORTA-DESEJADA_
+    - Rodar o Servidor: _node server.js [options]_
+      - _-p, --port <port_number>    # default is port 3000_
+      - _-d, --debug    # allows for DEBUG level logging_
 
 - Instruções de Uso
   - Adicionar Item no Carrinho
