@@ -1,33 +1,34 @@
 # SuperDoFuturo
 
-Front do projeto de Reconhecimento de produtos via YoLo
+Product recognition using YoLo
+Front End
 
-- Requisitos
-  - Conexão ativa com a internet (Pode ser contornado facilmente disponibilizando localmente Jquery, Bootsrap e socket.io para o client)
-  - Node instalado na máquina. (https://nodejs.org/en/)
-  - Backend responsável pela lógica e capaz de informar os enventos ao servidor. (https://github.com/Scheffel-V/SuperFuturo)
-- Montar Ambiente:
+# Requirements
+  - Active connection with the Internet (Can be solved making Jquery, Bootsrap and socket.io available locally in the client folder)
+  - Node Installed locally. (https://nodejs.org/en/)
+  - Downloading the Backend responsible for the logic and capable of firing events to the server. (https://github.com/Scheffel-V/SuperFuturo)
+
+# Setup:
 
   - Client:
-    - Abrir Index.html no Navegador
-    - Editar em script.js o estoque inicial / Produtos disponiveis
+    - Open Index.html on your browser.
   - Server:
-    - Instalar Dependencias: _npm install_ (Deve instalar automaticamente os itens abaixo)
+    - Install dependencies: _npm install_ (Should install these packages)
       - express (https://expressjs.com/pt-br/)
       - socket.io (https://socket.io/)
-    - Rodar o Servidor: _node server.js [options]_
+     - Run node Server: _node server.js_ [options]_
       - _-p, --port <port_number>    # default is port 3000_
       - _-d, --debug    # allows for DEBUG level logging_
 
-- Instruções de Uso
-  - Adicionar Item no Carrinho
-    - Com o server rodando, realizar uma chamada POST http://127.0.0.1:3000/Add?nome="NOME_PRODUTO"
-    - Substituir NOME_PRODUTO pelo produto que deseja mover do estoque para o carrinho
-  - Remover Item do Carrinho
-    - Com o server rodando, realizar uma chamada POST http://127.0.0.1:3000/Remove?nome="Ades"
-    - Substituir NOME_PRODUTO pelo produto que deseja mover do carrinho para o estoque
-  - Popular Estoque
-    - Com o server rodando, realizar uma chamada POST http://127.0.0.1:3000/PopulateStock
+# Instructions for use
+  - Add Item to Cart
+    - With the Node Server running, call POST http://127.0.0.1:3000/Add?nome="PRODUCT_NAME"
+    - Replace PRODUCT_NAME for the product you wish to move from stock to cart.
+  - Remove Item From Cart
+    - With the Node Server running, call  POST http://127.0.0.1:3000/Remove?nome="PRODUCT_NAME"
+    - Replace PRODUCT_NAME for the product you wish to move from cart to stock.
+  - Populate Stock
+    - With the Node Server running, call  POST http://127.0.0.1:3000/PopulateStock
     - Passar um JSON no body no seguinte formato (Futuramente retiraremos o ID e indexaremos pelo nome)
 
 ```json
@@ -39,3 +40,5 @@ Front do projeto de Reconhecimento de produtos via YoLo
   ]
 }
 ```
+# Next Steps
+  -  Make Jquery, Bootsrap and socket.io available locally in the client folder to ditch the need for active internet connection;
