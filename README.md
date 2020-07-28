@@ -16,9 +16,9 @@ Front End
     - Install dependencies: _npm install_ (Should install these packages)
       - express (https://expressjs.com/pt-br/)
       - socket.io (https://socket.io/)
-    - Run node Server: _node server.js_
-      - Standart port 3000
-      - _node server.js -p DESIRED_PORT_
+     - Run node Server: _node server.js_ [options]_
+      - _-p, --port <port_number>    # default is port 3000_
+      - _-d, --debug    # allows for DEBUG level logging_
 
 # Instructions for use
   - Add Item to Cart
@@ -40,6 +40,5 @@ Front End
   ]
 }
 ```
-
 # Next Steps
   -  Make Jquery, Bootsrap and socket.io available locally in the client folder to ditch the need for active internet connection;
